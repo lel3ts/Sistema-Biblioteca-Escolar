@@ -1,0 +1,17 @@
+{% extends "base.html" %}{% block title %}Acervo | Biblioteca Horizonte{% endblock %}
+{% block content %}
+<div class="page-heading"><div><span class="eyebrow">CATÁLOGO</span><h1>Acervo de livros</h1><p class="muted">Consulte os títulos e descubra sua próxima leitura.</p></div><span class="count-pill">{{ books|length }} título(s)</span></div>
+<div class="toolbar"><form method="GET" class="search-form"><input name="q" value="{{ search }}" placeholder="Buscar por título, autor ou categoria..."><button type="submit">⌕</button></form></div>
+{% if session.get('role') == 'admin' %}
+<div class="content-card add-book"><div class="card-heading"><div><span class="eyebrow">ADMINISTRAÇÃO</span><h2>Adicionar novo livro</h2></div><span class="mini-mark">＋</span></div>
+<form method="POST" class="book-form">
+<label>Título<input name="title" placeholder="Nome do livro" required></label><label>Autor<input name="author" placeholder="Nome do autor" required></label><label>Categoria<input name="category" placeholder="Ex.: Romance"></label><label>ISBN<input name="isbn" placeholder="Código ISBN"></label><label>Quantidade<input type="number" name="quantity" min="0" value="1"></label><button class="btn primary" type="submit">Cadastrar livro</button>
+</form></div>{% endif %}
+<div class="book-grid">
+{% for book in books %}
+<article class="book-card"><div class="book-cover"><span class="cover-symbol">✧</span><small>{{ book.category or 'ACERVO GERAL' }}</small><strong>{{ book.title[:1]|upper }}</strong></div><div class="book-info"><span class="eyebrow">{{ book.category or 'LIVRO' }}</span><h3>{{ book.title }}</h3><p>{{ book.author }}</p><div class="book-meta"><span>ISBN: {{ book.isbn or 'Não informado' }}</span><span class="stock {{ 'out' if book.quantity == 0 else '' }}">{{ book.quantity }} disponível(is)</span></div>
+{% if session.get('role') == 'admin' %}<details class="edit-details"><summary>Editar informações</summary><form method="POST" action="{{ url_for('editar_livro', book_id=book.id) }}" class="edit-form"><input name="title" value="{{ book.title }}" required><input name="author" value="{{ book.author }}" required><input name="category" value="{{ book.category or '' }}" placeholder="Categoria"><input name="isbn" value="{{ book.isbn or '' }}" placeholder="ISBN"><input type="number" name="quantity" min="0" value="{{ book.quantity }}"><button class="btn small-btn" type="submit">Salvar</button></form><form method="POST" action="{{ url_for('excluir_livro', book_id=book.id) }}" onsubmit="return confirm('Deseja excluir este livro?')"><button class="delete-link" type="submit">Excluir livro</button></form></details>{% endif %}
+</div></article>
+{% else %}<div class="empty-card">Nenhum livro encontrado. Tente outra busca.</div>{% endfor %}
+</div>
+{% endblock %}

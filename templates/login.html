@@ -1,0 +1,20 @@
+{% extends "base.html" %}{% block title %}Entrar | Biblioteca Horizonte{% endblock %}
+{% block auth_content %}
+<div class="auth-layout">
+  <section class="auth-art">
+    <div class="art-brand"><span class="brand-mark">H</span> horizonte</div>
+    <div class="art-copy"><span class="eyebrow light">BIBLIOTECA ESCOLAR</span><h1>Grandes ideias<br>começam com<br>uma página.</h1><p>Seu próximo conhecimento favorito está esperando por você.</p></div>
+    <div class="art-books"><span>✦</span><span>LEIA • DESCUBRA • COMPARTILHE</span></div>
+  </section>
+  <section class="auth-panel"><div class="auth-card">
+    <span class="eyebrow">BEM-VINDO DE VOLTA</span><h2>Acesse sua conta</h2><p class="muted">Entre para explorar o acervo da biblioteca.</p>
+    <form method="POST" class="form-stack">
+      <label>E-mail<input type="email" name="email" placeholder="seuemail@exemplo.com" required></label>
+      <label>Senha<input type="password" name="password" placeholder="Digite sua senha" required></label>
+      <button class="btn primary full" type="submit">Entrar na biblioteca <span>→</span></button>
+    </form>
+    <p class="auth-switch">Ainda não tem cadastro? <a href="{{ url_for('cadastro') }}">Criar conta</a></p>
+    <div class="demo-note"><strong>Acesso inicial do administrador</strong><br>admin@biblioteca.com / admin123</div>
+  </div></section>
+</div>
+{% endblock %}

@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% block title %}Alunos | Biblioteca Horizonte{% endblock %}
+{% block content %}
+<div class="page-heading"><div><span class="eyebrow">COMUNIDADE</span><h1>Alunos cadastrados</h1><p class="muted">Consulte as contas registradas na biblioteca.</p></div><span class="count-pill">{{ users|length }} aluno(s)</span></div>
+<div class="table-card"><table><thead><tr><th>ALUNO</th><th>E-MAIL</th><th>EMPRÉSTIMOS REGISTRADOS</th></tr></thead><tbody>
+{% for user in users %}<tr><td><div class="user-cell"><span class="avatar small-avatar">{{ user.name[0]|upper }}</span><strong>{{ user.name }}</strong></div></td><td>{{ user.email }}</td><td>{{ user.total_loans }}</td></tr>
+{% else %}<tr><td colspan="3" class="empty">Nenhum aluno cadastrado ainda.</td></tr>{% endfor %}
+</tbody></table></div>
+{% endblock %}

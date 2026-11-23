@@ -1,0 +1,20 @@
+{% extends "base.html" %}{% block title %}Criar conta | Biblioteca Horizonte{% endblock %}
+{% block auth_content %}
+<div class="auth-layout">
+  <section class="auth-art">
+    <div class="art-brand"><span class="brand-mark">H</span> horizonte</div>
+    <div class="art-copy"><span class="eyebrow light">FAÇA PARTE</span><h1>Conhecimento<br>é melhor quando<br>compartilhado.</h1><p>Crie seu acesso e descubra novas histórias.</p></div>
+    <div class="art-books"><span>✦</span><span>LEIA • DESCUBRA • COMPARTILHE</span></div>
+  </section>
+  <section class="auth-panel"><div class="auth-card">
+    <span class="eyebrow">NOVO CADASTRO</span><h2>Crie sua conta</h2><p class="muted">Preencha os dados para acessar a biblioteca.</p>
+    <form method="POST" class="form-stack">
+      <label>Nome completo<input name="name" placeholder="Como podemos chamar você?" required></label>
+      <label>E-mail<input type="email" name="email" placeholder="seuemail@exemplo.com" required></label>
+      <label>Senha<input type="password" name="password" minlength="4" placeholder="Mínimo de 4 caracteres" required></label>
+      <button class="btn primary full" type="submit">Criar minha conta <span>→</span></button>
+    </form>
+    <p class="auth-switch">Já possui cadastro? <a href="{{ url_for('login') }}">Voltar ao login</a></p>
+  </div></section>
+</div>
+{% endblock %}
